@@ -42,25 +42,40 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+{open && (
+  <div className="md:hidden bg-white shadow-md px-4 py-2 space-y-2">
+    <Link 
+      to="/" 
+      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
+    >
+      Home
+    </Link>
+    <Link 
+      to="/about" 
+      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
+    >
+      About
+    </Link>
+    <Link 
+      to="/sign-in" 
+      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
+    >
+      Sign In
+    </Link>
 
-      {open && (
-        <div className="md:hidden bg-white shadow-md px-4 py-2 space-y-2">
-            <Link to="/" className="hover:text-blue-500">Home</Link>
-            <Link to="/about" className="hover:text-blue-500">About</Link>
-            <Link to="/sign-in" className="hover:text-blue-500">Sign In</Link>
+    <div className="flex mt-2">
+      <input
+        type="text"
+        placeholder="Search..."
+        className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center">
+        <Search size={18} />
+      </button>
+    </div>
+  </div>
+)}
 
-          <div className="flex mt-2">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center">
-              <Search size={18} />
-            </button>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }
