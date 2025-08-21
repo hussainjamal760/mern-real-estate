@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import {signInFailure,signInStart,signInSuccess} from '../redux/user/userSlice.js'
+import OAuth from "../components/oAuth.jsx";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -89,17 +90,7 @@ export default function SignIn() {
             <hr className="flex-1 border-gray-300" />
           </div>
 
-          <button
-            type="button"
-            className="w-full border border-gray-300 py-2 rounded-xl flex items-center justify-center hover:bg-gray-100 transition text-sm"
-          >
-            <img
-              src="https://www.svgrepo.com/show/355037/google.svg"
-              alt="Google"
-              className="w-5 h-5 mr-2"
-            />
-            Continue with Google
-          </button>
+       <OAuth/>
         </form>
 
         {error && (
