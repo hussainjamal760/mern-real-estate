@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { Menu, X, Search, Building } from "lucide-react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <nav className="bg-white shadow-md fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          
-          <div className="flex-shrink-0 text-2xl font-bold">
-            <Link to={'/'}>
-                <Building size={40}/>
+          <div className="flex-shrink-0 text-2xl font-bold flex items-center gap-2 text-blue-600">
+            <Link to={"/"} className="flex items-center gap-1">
+              <Building size={32} className="text-blue-600" />
+              <span className="hidden sm:block font-semibold">RealEstate</span>
             </Link>
           </div>
 
@@ -20,19 +22,40 @@ export default function Navbar() {
             <div className="flex w-full max-w-md">
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search properties..."
                 className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center">
+              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center transition">
                 <Search size={18} />
               </button>
             </div>
           </div>
 
-          <div className="hidden md:flex space-x-6 text-gray-700 font-medium">
-            <Link to="/" className="hover:text-blue-500">Home</Link>
-            <Link to="/about" className="hover:text-blue-500">About</Link>
-            <Link to="/sign-in" className="hover:text-blue-500">Sign In</Link>
+          {/* Links */}
+          <div className="hidden md:flex items-center space-x-6 text-gray-700 font-medium">
+            <Link to="/" className="hover:text-blue-600 transition">
+              Home
+            </Link>
+            <Link to="/about" className="hover:text-blue-600 transition">
+              About
+            </Link>
+
+            {currentUser ? (
+              <Link to="/profile" className="flex items-center gap-2">
+                <img
+                  className="rounded-full h-9 w-9 object-cover border-2 border-blue-500 hover:scale-105 transition"
+                  src={currentUser.avatar}
+                  alt="profile"
+                />
+              </Link>
+            ) : (
+              <Link
+                to="/sign-in"
+                className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition shadow-md"
+              >
+                Sign In
+              </Link>
+            )}
           </div>
 
           <div className="md:hidden">
@@ -42,40 +65,45 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-{open && (
-  <div className="md:hidden bg-white shadow-md px-4 py-2 space-y-2">
-    <Link 
-      to="/" 
-      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
-    >
-      Home
-    </Link>
-    <Link 
-      to="/about" 
-      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
-    >
-      About
-    </Link>
-    <Link 
-      to="/sign-in" 
-      className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-500"
-    >
-      Sign In
-    </Link>
 
-    <div className="flex mt-2">
-      <input
-        type="text"
-        placeholder="Search..."
-        className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center">
-        <Search size={18} />
-      </button>
-    </div>
-  </div>
-)}
+      {open && (
+        <div className="md:hidden bg-white shadow-md px-4 py-3 space-y-2 animate-slideDown">
+          <Link
+            to="/"
+            className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition"
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            className="block w-full text-center py-2 rounded-md hover:bg-blue-50 hover:text-blue-600 transition"
+          >
+            About
+          </Link>
+          <Link to="/profile" className="flex justify-center items-center">
+            {currentUser ? (
+              <img
+                className="rounded-full h-8 w-8 object-cover border border-blue-400"
+                src={currentUser.avatar}
+                alt="profile"
+              />
+            ) : (
+              <span className="text-blue-600 font-medium">Sign In</span>
+            )}
+          </Link>
 
+          <div className="flex mt-2">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full px-4 py-2 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 rounded-r-full flex items-center justify-center transition">
+              <Search size={18} />
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
