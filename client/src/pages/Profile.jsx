@@ -3,6 +3,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
 } from "../redux/user/userSlice.js";
 import { useState } from "react";
 
@@ -30,7 +33,7 @@ export default function Profile() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-        credentials: "include", // send cookies with request
+        credentials: "include", 
       });
 
       const data = await res.json();
@@ -47,10 +50,26 @@ export default function Profile() {
     }
   };
 
+  const handleDelete=async()=>{
+    try {
+      dispatch(deleteUserStart())
+      const res = await fetch(`/api/user/delete/${currentUser._id}` , {
+        method:'DELETE',
+      })
+      const data = await res.json()
+      if(data.success === false){
+        dispatch(deleteUserFailure(data.message))
+        return
+      }
+      dispatch(deleteUserSuccess(data))
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message))
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center pt-10 px-4">
       <div className="w-full max-w-sm bg-white rounded-2xl shadow-lg p-6">
-        {/* Avatar */}
         <div className="flex justify-center mb-5">
           <img
             src={currentUser?.avatar}
@@ -59,7 +78,6 @@ export default function Profile() {
           />
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit}>
           <div className="space-y-3">
             <input
@@ -97,17 +115,15 @@ export default function Profile() {
           </button>
         </form>
 
-        {/* Actions */}
         <div className="flex justify-between mt-5">
           <button className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
             Sign Out
           </button>
-          <button className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition shadow-md">
-            Delete Account
+          <button onClick={handleDelete} className="px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition shadow-md">
+            Delete
           </button>
         </div>
 
-        {/* Messages */}
         <div className="mt-4 text-center">
           {error && <span className="text-red-600">{error}</span>}
           {success && (
