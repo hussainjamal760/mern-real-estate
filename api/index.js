@@ -2,16 +2,21 @@ import express from 'express'
 import mongoose from 'mongoose'
 import 'dotenv/config'
 import authRouter from './routes/authRoutes.js'
+import userRouter from './routes/userRoutes.js'
+import cookieParser from 'cookie-parser'
+
 const PORT = 3000;
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
 
 mongoose.connect(process.env.MONGO).then(()=>{console.log("Mongo connected")
 }).catch((err)=>console.log(err))
 
 app.use('/api/auth' , authRouter)
+app.use('/api/user' , userRouter)
 
 app.use((err , req , res , next)=>{
     const statusCode = err.statusCode || 500;
