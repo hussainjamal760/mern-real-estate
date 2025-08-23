@@ -11,6 +11,7 @@ import {
   SignOutUserSuccess,
 } from "../redux/user/userSlice.js";
 import { useState } from "react";
+import {Link} from "react-router-dom"
 
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -133,6 +134,14 @@ export default function Profile() {
           </button>
         </form>
 
+            <div className="mt-3 flex justify-center">
+  <Link
+    to="/create-listing"
+ className=" w-full py-2 text-center bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition shadow-md"  >
+    Create New Listing
+  </Link>
+</div>
+
         <div className="flex justify-between mt-5">
           <button onClick={handleSignOut} className="px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">
             Sign Out
@@ -141,6 +150,8 @@ export default function Profile() {
             Delete
           </button>
         </div>
+        
+
 
         <div className="mt-4 text-center">
           {error && <span className="text-red-600">{error}</span>}
