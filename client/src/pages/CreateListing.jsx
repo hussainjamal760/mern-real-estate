@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
-// (Optional) fixed folder to keep things tidy
 const CLOUDINARY_FOLDER = 'real-estate/listings';
 
 export default function CreateListing() {
@@ -30,7 +29,6 @@ export default function CreateListing() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // ---- Cloudinary uploader ----
   const storeImage = async (file) => {
     const data = new FormData();
     data.append('file', file);
@@ -46,13 +44,11 @@ export default function CreateListing() {
     if (!res.ok) {
       throw new Error(json?.error?.message || 'Cloudinary upload failed');
     }
-    return json.secure_url; // final image URL
+    return json.secure_url; 
   };
 
-  // Upload selected files to Cloudinary
   const handleImageSubmit = async () => {
     try {
-      // Max 6 images total
       if (files.length === 0) {
         setImageUploadError('Please select at least one image');
         return;
@@ -62,7 +58,6 @@ export default function CreateListing() {
         return;
       }
 
-      // Client-side size check (2MB per image, optional)
       for (const f of files) {
         if (f.size > 2 * 1024 * 1024) {
           setImageUploadError('Each image must be ≤ 2 MB');
