@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,9 @@ const CLOUDINARY_FOLDER = "real-estate/listings";
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
+
+  // files will be a real array of File objects
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
@@ -47,18 +50,40 @@ export default function CreateListing() {
 
   const handleImageSubmit = async () => {
     try {
-      if (files.length === 0) return setImageUploadError("Please select at least one image");
-      if (files.length + formData.imageUrls.length > 6) return setImageUploadError("Max 6 images allowed");
-      for (const f of files) {
-        if (f.size > 2 * 1024 * 1024) return setImageUploadError("Each image must be ≤ 2 MB");
+      // Ensure we work with a real array
+      const fileArray = Array.isArray(files) ? files : Array.from(files || []);
+
+      if (fileArray.length === 0) {
+        setImageUploadError("Please select at least one image");
+        return;
       }
 
+      if (fileArray.length + formData.imageUrls.length > 6) {
+        setImageUploadError("You can only upload 6 images per listing");
+        return;
+      }
+
+      for (const f of fileArray) {
+        if (f.size > 2 * 1024 * 1024) {
+          setImageUploadError("Each image must be ≤ 2 MB");
+          return;
+        }
+      }
+
+      setImageUploadError(false);
       setUploading(true);
-      const urls = await Promise.all(files.map((f) => storeImage(f)));
+
+      // upload in parallel
+      const urls = await Promise.all(fileArray.map((f) => storeImage(f)));
+
       setFormData((prev) => ({ ...prev, imageUrls: prev.imageUrls.concat(urls) }));
-      setUploading(false);
+
+      // clear file input + local files array
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      setFiles([]);
     } catch (err) {
       setImageUploadError(err.message || "Image upload failed");
+    } finally {
       setUploading(false);
     }
   };
@@ -73,11 +98,15 @@ export default function CreateListing() {
   const handleChange = (e) => {
     if (e.target.id === "sale" || e.target.id === "rent") {
       setFormData({ ...formData, type: e.target.id });
-    } else if (["parking", "furnished", "offer"].includes(e.target.id)) {
-      setFormData({ ...formData, [e.target.id]: e.target.checked });
-    } else {
-      setFormData({ ...formData, [e.target.id]: e.target.value });
+      return;
     }
+
+    if (["parking", "furnished", "offer"].includes(e.target.id)) {
+      setFormData({ ...formData, [e.target.id]: e.target.checked });
+      return;
+    }
+
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -103,6 +132,7 @@ export default function CreateListing() {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
