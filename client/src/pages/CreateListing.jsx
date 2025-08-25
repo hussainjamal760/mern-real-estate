@@ -214,55 +214,75 @@ export default function CreateListing() {
             ))}
           </div>
 
-          {/* Bedrooms & Prices */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
-            <input
-              type="number"
-              id="bedrooms"
-              min="1"
-              max="10"
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              onChange={handleChange}
-              value={formData.bedrooms}
-              placeholder="Bedrooms"
-            />
-            <input
-              type="number"
-              id="bathrooms"
-              min="1"
-              max="10"
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              onChange={handleChange}
-              value={formData.bathrooms}
-              placeholder="Bathrooms"
-            />
-            <input
-              type="number"
-              id="regularPrice"
-              min="50"
-              max="10000000"
-              required
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              onChange={handleChange}
-              value={formData.regularPrice}
-              placeholder="Regular Price"
-            />
-            {formData.offer && (
-              <input
-                type="number"
-                id="discountPrice"
-                min="0"
-                max="10000000"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-                onChange={handleChange}
-                value={formData.discountPrice}
-                placeholder="Discount Price"
-              />
-            )}
-          </div>
+          {/* Bedrooms */}
+<div className="flex flex-col">
+  <label htmlFor="bedrooms" className="font-medium text-gray-700 mb-1">
+    Bedrooms
+  </label>
+  <input
+    type="number"
+    id="bedrooms"
+    min="1"
+    max="10"
+    required
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+    onChange={handleChange}
+    value={formData.bedrooms}
+  />
+</div>
+
+{/* Bathrooms */}
+<div className="flex flex-col">
+  <label htmlFor="bathrooms" className="font-medium text-gray-700 mb-1">
+    Bathrooms
+  </label>
+  <input
+    type="number"
+    id="bathrooms"
+    min="1"
+    max="10"
+    required
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+    onChange={handleChange}
+    value={formData.bathrooms}
+  />
+</div>
+
+{/* Regular Price */}
+<div className="flex flex-col">
+  <label htmlFor="regularPrice" className="font-medium text-gray-700 mb-1">
+    Regular Price
+  </label>
+  <input
+    type="number"
+    id="regularPrice"
+    min="50"
+    max="10000000"
+    required
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+    onChange={handleChange}
+    value={formData.regularPrice}
+  />
+</div>
+
+{/* Discount Price (only if offer true) */}
+{formData.offer && (
+  <div className="flex flex-col">
+    <label htmlFor="discountPrice" className="font-medium text-gray-700 mb-1">
+      Discount Price
+    </label>
+    <input
+      type="number"
+      id="discountPrice"
+      min="0"
+      max="10000000"
+      required
+      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+      onChange={handleChange}
+      value={formData.discountPrice}
+    />
+  </div>
+)}
 
           {/* Image Upload */}
           <div>
