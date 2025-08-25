@@ -123,6 +123,8 @@ export default function Profile() {
     }
   };
 
+  
+
   return (
     <div className="min-h-screen bg-gray-100 flex">
       {/* Left Panel */}
