@@ -139,7 +139,7 @@ export default function Home() {
 <div className="flex-1 flex justify-center lg:justify-end z-10">
   <div className="relative">
     <DotLottieReact
-      src="./public/hero.json"
+      src="/images/hero.json"
       loop
       autoplay
       style={{
