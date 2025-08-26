@@ -25,10 +25,9 @@ app.use('/api/listing' , listingRouter)
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
-app.get('/*', function (req, res) {
+app.get(/^\/(?!api).*/, function (req, res) {
   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 });
-
 
 app.use((err , req , res , next)=>{
     const statusCode = err.statusCode || 500;
