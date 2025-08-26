@@ -11,7 +11,6 @@ export default function CreateListing() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  // files will be a real array of File objects
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
     imageUrls: [],
@@ -50,7 +49,6 @@ export default function CreateListing() {
 
   const handleImageSubmit = async () => {
     try {
-      // Ensure we work with a real array
       const fileArray = Array.isArray(files) ? files : Array.from(files || []);
 
       if (fileArray.length === 0) {
@@ -73,12 +71,10 @@ export default function CreateListing() {
       setImageUploadError(false);
       setUploading(true);
 
-      // upload in parallel
       const urls = await Promise.all(fileArray.map((f) => storeImage(f)));
 
       setFormData((prev) => ({ ...prev, imageUrls: prev.imageUrls.concat(urls) }));
 
-      // clear file input + local files array
       if (fileInputRef.current) fileInputRef.current.value = "";
       setFiles([]);
     } catch (err) {
@@ -136,7 +132,6 @@ export default function CreateListing() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      {/* Left Panel */}
       <div className="w-1/3 bg-white shadow-lg flex flex-col items-center justify-center p-6">
         <img
           src={currentUser?.avatar}
@@ -153,12 +148,10 @@ export default function CreateListing() {
         </p>
       </div>
 
-      {/* Right Panel */}
       <div className="flex-1 mt-12 p-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Create a Listing</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
-          {/* Name */}
           <input
             type="text"
             placeholder="Name"
@@ -171,7 +164,6 @@ export default function CreateListing() {
             value={formData.name}
           />
 
-          {/* Description */}
           <textarea
             placeholder="Description"
             className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
@@ -181,7 +173,6 @@ export default function CreateListing() {
             value={formData.description}
           />
 
-          {/* Address */}
           <input
             type="text"
             placeholder="Address"
@@ -192,7 +183,6 @@ export default function CreateListing() {
             value={formData.address}
           />
 
-          {/* Options */}
           <div className="flex flex-wrap gap-6">
             {["sale", "rent", "parking", "furnished", "offer"].map((opt) => (
               <label key={opt} className="flex items-center gap-2">
@@ -213,9 +203,7 @@ export default function CreateListing() {
               </label>
             ))}
           </div>
-{/* Bedrooms, Bathrooms, Prices */}
 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-  {/* Bedrooms */}
   <div className="flex flex-col">
     <label htmlFor="bedrooms" className="font-medium text-gray-700 mb-1">
       Bedrooms
@@ -232,7 +220,6 @@ export default function CreateListing() {
     />
   </div>
 
-  {/* Bathrooms */}
   <div className="flex flex-col">
     <label htmlFor="bathrooms" className="font-medium text-gray-700 mb-1">
       Bathrooms
@@ -249,7 +236,6 @@ export default function CreateListing() {
     />
   </div>
 
-  {/* Regular Price */}
   <div className="flex flex-col">
     <label htmlFor="regularPrice" className="font-medium text-gray-700 mb-1">
       Regular Price
@@ -266,7 +252,6 @@ export default function CreateListing() {
     />
   </div>
 
-  {/* Discount Price */}
   {formData.offer && (
     <div className="flex flex-col">
       <label htmlFor="discountPrice" className="font-medium text-gray-700 mb-1">
@@ -286,7 +271,6 @@ export default function CreateListing() {
   )}
 </div>
 
-          {/* Image Upload */}
           <div>
             <p className="font-semibold text-gray-700 mb-2">
               Images: <span className="text-sm text-gray-500">max 6 (first will be cover)</span>
@@ -312,7 +296,6 @@ export default function CreateListing() {
             {imageUploadError && <p className="text-red-600 mt-2">{imageUploadError}</p>}
           </div>
 
-          {/* Uploaded Images */}
           {formData.imageUrls.length > 0 && (
             <div className="space-y-2">
               {formData.imageUrls.map((url, index) => (
@@ -330,7 +313,7 @@ export default function CreateListing() {
             </div>
           )}
 
-          {/* Submit */}
+          
           <button
             disabled={loading || uploading}
             className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-70 shadow-md"

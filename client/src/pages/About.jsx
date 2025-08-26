@@ -4,7 +4,6 @@ import { FaUsers, FaHandshake, FaHome, FaPhone } from "react-icons/fa";
 export default function About() {
   return (
     <div className="w-full">
-      {/* Hero Section */}
       <section className="bg-blue-600 text-white py-20 text-center">
         <h1 className="text-4xl lg:text-6xl font-bold mb-4">About Us</h1>
         <p className="text-lg lg:text-xl max-w-2xl mx-auto">
@@ -12,7 +11,6 @@ export default function About() {
         </p>
       </section>
 
-      {/* Company Intro */}
       <section className="max-w-7xl mx-auto px-6 lg:px-20 py-16 flex flex-col lg:flex-row items-center gap-12">
         <img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
@@ -32,7 +30,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission & Vision */}
       <section className="bg-gray-50 py-16">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10">
           <div className="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
@@ -50,7 +47,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
       <section className="max-w-7xl mx-auto px-6 lg:px-20 py-20 text-center">
         <h2 className="text-3xl font-bold mb-12">Why Choose Us?</h2>
         <div className="grid md:grid-cols-3 gap-10">
@@ -72,7 +68,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-20 text-center">
           <h2 className="text-3xl font-bold mb-12">Meet Our Team</h2>
@@ -92,7 +87,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="text-center py-16 bg-blue-600 text-white">
         <h2 className="text-3xl font-bold mb-4">Ready to Find Your Dream Home?</h2>
         <p className="mb-6">Get in touch with us today and make your dream a reality.</p>

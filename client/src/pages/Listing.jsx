@@ -47,7 +47,6 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-  // Auto-slide
   useEffect(() => {
     if (listing?.imageUrls.length > 1) {
       const timer = setInterval(() => {
@@ -71,7 +70,6 @@ export default function Listing() {
 
   return (
     <main className="mt-20">
-      {/* Loader */}
       {loading && (
         <div className="flex justify-center items-center h-64">
           <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
@@ -84,7 +82,6 @@ export default function Listing() {
         </p>
       )}
 
-      {/* Slider */}
       {listing && !loading && !error && (
         <div className="flex justify-center relative">
           <div className="relative w-[1000px] h-[500px] overflow-hidden rounded-2xl shadow-2xl border border-gray-200">
@@ -95,7 +92,6 @@ export default function Listing() {
               }}
             ></div>
 
-            {/* Left Button */}
             <button
               onClick={prevSlide}
               className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black/90 transition"
@@ -103,7 +99,6 @@ export default function Listing() {
               ❮
             </button>
 
-            {/* Right Button */}
             <button
               onClick={nextSlide}
               className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black/90 transition"
@@ -111,7 +106,6 @@ export default function Listing() {
               ❯
             </button>
 
-            {/* Dots */}
             <div className="absolute bottom-4 w-full flex justify-center gap-3">
               {listing.imageUrls.map((_, index) => (
                 <div
@@ -129,7 +123,6 @@ export default function Listing() {
         </div>
       )}
 
-      {/* Share Button */}
       <div className="fixed top-[13%] right-[3%] z-10 shadow-lg border rounded-full w-12 h-12 flex justify-center items-center bg-white cursor-pointer hover:scale-110 transition">
         <FaShare
           className="text-slate-600 text-xl"
@@ -147,10 +140,8 @@ export default function Listing() {
         </p>
       )}
 
-      {/* Listing Details */}
       {listing && (
         <div className="flex flex-col max-w-5xl mx-auto p-6 my-10 bg-white rounded-2xl shadow-2xl border border-gray-200">
-          {/* Title & Price */}
           <p className="text-3xl font-bold text-gray-900 flex justify-between items-center">
             {listing.name}
             <span className="text-green-700 text-2xl font-semibold">
@@ -162,13 +153,11 @@ export default function Listing() {
             </span>
           </p>
 
-          {/* Address */}
           <p className="flex items-center mt-4 gap-2 text-gray-600 text-lg">
             <FaMapMarkerAlt className="text-red-600 text-xl" />
             {listing.address}
           </p>
 
-          {/* Tags */}
           <div className="flex gap-4 mt-4">
             <p className="bg-blue-600 text-white px-4 py-2 rounded-full shadow text-sm font-semibold">
               {listing.type === "rent" ? "🏠 For Rent" : "🏡 For Sale"}
@@ -180,13 +169,11 @@ export default function Listing() {
             )}
           </div>
 
-          {/* Description */}
           <p className="text-gray-700 mt-6 leading-relaxed text-lg">
             <span className="font-bold text-gray-900">Description:</span>{" "}
             {listing.description}
           </p>
 
-          {/* Features */}
           <ul className="text-gray-900 font-medium text-lg flex flex-wrap items-center gap-6 mt-6">
             <li className="flex items-center gap-2">
               <FaBed className="text-2xl text-blue-700" />

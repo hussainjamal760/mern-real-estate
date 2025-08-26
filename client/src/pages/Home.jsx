@@ -11,7 +11,6 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // slider states
   const [currentIndex, setCurrentIndex] = useState(0);
   const [allImages, setAllImages] = useState([]);
 
@@ -47,7 +46,6 @@ export default function Home() {
         setSaleListings(data);
         setLoading(false);
 
-        // collect all images for slider
         const imgs = [
           ...offerListings.flatMap((l) => l.imageUrls || []),
           ...rentListings.flatMap((l) => l.imageUrls || []),
@@ -63,7 +61,6 @@ export default function Home() {
     fetchOfferListings();
   }, []);
 
-  // Update all images when listings change
   useEffect(() => {
     if (!loading) {
       const imgs = [
@@ -75,7 +72,6 @@ export default function Home() {
     }
   }, [offerListings, rentListings, saleListings, loading]);
 
-  // slider functions
   const prevSlide = () => {
     setCurrentIndex((prev) =>
       prev === 0 ? allImages.length - 1 : prev - 1
@@ -89,12 +85,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Hero Section */}
       <div className="relative bg-white">
-  {/* Main Content */}
   <div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-6 lg:px-20 py-20 lg:py-24 gap-12">
     
-    {/* Left Text */}
     <div className="flex-1 space-y-7 z-10">
       <div className="space-y-1">
         <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-4">
@@ -143,8 +136,6 @@ export default function Home() {
       </div>
     </div>
 
-    {/* Right Lottie Animation */}
-    {/* Right Lottie Animation */}
 <div className="flex-1 flex justify-center lg:justify-end z-10">
   <div className="relative">
     <DotLottieReact
@@ -152,8 +143,8 @@ export default function Home() {
       loop
       autoplay
       style={{
-        width: "600px",   // fixed width
-        height: "600px",  // fixed height
+        width: "600px",   
+        height: "600px",  
       }}
     />
   </div>
@@ -163,7 +154,6 @@ export default function Home() {
 </div>
 
 
-      {/* Features Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-20 py-16">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg border border-white/50 hover:shadow-xl transition-all duration-300">
@@ -198,7 +188,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Image Slider Section */}
      <div className="relative w-full max-w-6xl mx-auto">
   <div className="relative w-full h-[550px] overflow-hidden rounded-2xl shadow-2xl">
     <div
@@ -208,7 +197,6 @@ export default function Home() {
       }}
     ></div>
 
-    {/* Left Button */}
     <button
       onClick={prevSlide}
       className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black/90 transition z-10"
@@ -218,7 +206,6 @@ export default function Home() {
       </svg>
     </button>
 
-    {/* Right Button */}
     <button
       onClick={nextSlide}
       className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-lg hover:bg-black/90 transition z-10"
@@ -228,7 +215,6 @@ export default function Home() {
       </svg>
     </button>
 
-    {/* Dots */}
     <div className="absolute bottom-4 w-full flex justify-center gap-3">
       {allImages.slice(0, 10).map((_, index) => (
         <div
@@ -246,14 +232,12 @@ export default function Home() {
 </div>
 
 
-      {/* Loading Spinner */}
       {loading && (
         <div className="flex justify-center items-center py-20">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
       )}
 
-      {/* Listings Section */}
    <div className="w-full p-25 flex flex-col gap-8 my-10">
   {offerListings && offerListings.length > 0 && (
     <div>
@@ -311,7 +295,6 @@ export default function Home() {
 
 
 
-      {/* CTA Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-20 py-20">
         <div className="bg-gradient-to-r from-blue-600 to-blue-300 rounded-3xl p-12 lg:p-16 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-black/10"></div>
@@ -335,10 +318,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="bg-slate-900 text-slate-300 py-12 mt-auto">
       <div className="max-w-7xl mx-auto px-6 lg:px-20 grid md:grid-cols-4 gap-8">
-        {/* Brand */}
         <div className="md:col-span-2">
           <h3 className="text-white font-bold text-2xl mb-4">Real Estate</h3>
           <p className="text-lg mb-4">
@@ -350,7 +331,6 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Quick Links */}
         <div>
           <h4 className="text-white font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-3">
@@ -382,7 +362,6 @@ export default function Home() {
           </ul>
         </div>
 
-        {/* Social Icons */}
         <div>
           <h4 className="text-white font-semibold mb-4">Connect With Us</h4>
           <div className="flex gap-4 mb-4">

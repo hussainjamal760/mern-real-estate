@@ -222,9 +222,7 @@ export default function UpdateListing() {
             ))}
           </div>
 
-{/* Bedrooms, Bathrooms, Prices */}
 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-  {/* Bedrooms */}
   <div className="flex flex-col">
     <label htmlFor="bedrooms" className="font-medium text-gray-700 mb-1">
       Bedrooms
@@ -241,7 +239,6 @@ export default function UpdateListing() {
     />
   </div>
 
-  {/* Bathrooms */}
   <div className="flex flex-col">
     <label htmlFor="bathrooms" className="font-medium text-gray-700 mb-1">
       Bathrooms
@@ -258,7 +255,6 @@ export default function UpdateListing() {
     />
   </div>
 
-  {/* Regular Price */}
   <div className="flex flex-col">
     <label htmlFor="regularPrice" className="font-medium text-gray-700 mb-1">
       Regular Price
@@ -275,7 +271,6 @@ export default function UpdateListing() {
     />
   </div>
 
-  {/* Discount Price */}
   {formData.offer && (
     <div className="flex flex-col">
       <label htmlFor="discountPrice" className="font-medium text-gray-700 mb-1">
@@ -295,7 +290,6 @@ export default function UpdateListing() {
   )}
 </div>
 
-          {/* Image Upload */}
           <div>
             <p className="font-semibold text-gray-700 mb-2">
               Images: <span className="text-sm text-gray-500">max 6 (first will be cover)</span>
@@ -321,7 +315,6 @@ export default function UpdateListing() {
             {imageUploadError && <p className="text-red-600 mt-2">{imageUploadError}</p>}
           </div>
 
-          {/* Uploaded Images */}
           {formData.imageUrls.length > 0 && (
             <div className="space-y-2">
               {formData.imageUrls.map((url, index) => (
@@ -339,7 +332,6 @@ export default function UpdateListing() {
             </div>
           )}
 
-          {/* Submit */}
           <button
             disabled={loading || uploading}
             className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition disabled:opacity-70 shadow-md"

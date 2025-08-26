@@ -54,7 +54,6 @@ export default function Navbar() {
                 </form>
           </div>
 
-          {/* Links */}
           <div className="hidden md:flex items-center space-x-6 text-gray-700 font-medium">
             <Link to="/" className="hover:text-blue-600 transition">
               Home

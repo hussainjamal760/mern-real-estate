@@ -127,7 +127,6 @@ export default function Profile() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      {/* Left Panel */}
       <div className="w-1/3 bg-white shadow-lg flex flex-col items-center justify-center p-6">
         <img
           src={currentUser?.avatar}
@@ -153,7 +152,6 @@ export default function Profile() {
         </button>
       </div>
 
-      {/* Right Panel */}
       <div className="flex-1 mt-12 p-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Edit Profile</h1>
 
@@ -220,7 +218,6 @@ export default function Profile() {
         )}
       </div>
 
-      {/* ✅ Listings Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-lg relative">

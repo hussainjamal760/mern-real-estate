@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState("");
-  const [open, setOpen] = useState(false); // modal toggle
+  const [open, setOpen] = useState(false); 
 
   const onChange = (e) => {
     setMessage(e.target.value);
@@ -27,7 +27,6 @@ export default function Contact({ listing }) {
     <>
       {landlord && (
         <>
-          {/* Button to open modal */}
           <button
             onClick={() => setOpen(true)}
             className="bg-slate-600 mt-3 text-white px-4 py-4 rounded-lg hover:bg-slate-700 transition"
@@ -35,11 +34,9 @@ export default function Contact({ listing }) {
             Contact {landlord.username}
           </button>
 
-          {/* Modal */}
           {open && (
             <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
               <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
-                {/* Close button */}
                 <button
                   onClick={() => setOpen(false)}
                   className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl"
