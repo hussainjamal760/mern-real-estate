@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ListingItem from "../components/ListinItem";
 
+
 export default function Search() {
   const navigate = useNavigate();
   const location = useLocation();
