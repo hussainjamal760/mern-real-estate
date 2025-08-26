@@ -20,38 +20,39 @@ export default function SignIn() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      dispatch(signInStart())
-      setError(null);
-      setSuccess(null);
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    dispatch(signInStart())
+    setSuccess(null);   
 
-      const res = await fetch("/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    const res = await fetch("/api/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (data.success === false) {
-        dispatch(signInFailure(data.message))
-        return;
-      }
-
-      dispatch(signInSuccess(data))
-
-      setTimeout(() => {
-        navigate("/");
-      }, 1500);
-
-    } catch (error) {
-      dispatch(signInFailure(error.message))
+    if (data.success === false) {
+      dispatch(signInFailure(data.message))
+      return;
     }
-  };
+
+    dispatch(signInSuccess(data))
+    setSuccess("Login successful!");
+
+    setTimeout(() => {
+      navigate("/");
+    }, 1500);
+
+  } catch (error) {
+    dispatch(signInFailure(error.message))
+  }
+};
+
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-r from-blue-300 to-white pt-20">

@@ -10,12 +10,14 @@ import {
   SignOutUserStart,
   SignOutUserSuccess,
 } from "../redux/user/userSlice.js";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+    const fileInputRef = useRef(null);
+
 
   const [formData, setFormData] = useState({
     username: currentUser?.username || "",
@@ -124,15 +126,63 @@ export default function Profile() {
   };
 
   
+   const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formDataCloud = new FormData();
+    formDataCloud.append("file", file);
+    formDataCloud.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formDataCloud,
+        }
+      );
+      const data = await res.json();
+
+      if (data.secure_url) {
+        setFormData((prev) => ({ ...prev, avatar: data.secure_url }));
+
+        dispatch(updateUserStart());
+        const updateRes = await fetch(`/api/user/update/${currentUser._id}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ avatar: data.secure_url }),
+          credentials: "include",
+        });
+        const updateData = await updateRes.json();
+        if (updateData.success === false) {
+          dispatch(updateUserFailure(updateData.message));
+          return;
+        }
+        dispatch(updateUserSuccess(updateData));
+      }
+    } catch (err) {
+      console.error("Image upload error:", err);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+     <div className="min-h-screen bg-gray-100 flex">
       <div className="w-1/3 bg-white shadow-lg flex flex-col items-center justify-center p-6">
         <img
-          src={currentUser?.avatar}
+          src={formData.avatar || currentUser?.avatar}
           alt="profile"
-          className="w-40 h-40 rounded-full object-cover border-4 border-blue-500 shadow-md"
+          className="w-40 h-40 rounded-full object-cover border-4 border-blue-500 shadow-md cursor-pointer"
+          onClick={() => fileInputRef.current.click()}
         />
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          onChange={handleImageUpload}
+          className="hidden"
+        />
+
         <h2 className="mt-4 text-2xl font-semibold text-gray-800">
           {currentUser?.username}
         </h2>
