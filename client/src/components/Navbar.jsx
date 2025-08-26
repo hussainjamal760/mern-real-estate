@@ -31,11 +31,15 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0 text-2xl font-bold flex items-center gap-2 text-blue-600">
-            <Link to={"/"} className="flex items-center gap-1">
-              <Building size={32} className="text-blue-600" />
-              <span className="hidden sm:block font-semibold">RealEstate</span>
-            </Link>
-          </div>
+  <Link to={"/"} className="flex items-center gap-2">
+    <img 
+      src="/src/assets/logo.jpg" 
+      alt="Logo" 
+      className="w-16 h-16 rounded-full object-cover" 
+    />
+  </Link>
+</div>
+
 
           <div className="hidden md:flex flex-1 justify-center">
           <form onSubmit={handleSubmit}>
