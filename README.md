@@ -1,4 +1,4 @@
-<img width="1330" height="590" alt="image" src="https://github.com/user-attachments/assets/ac6da281-567f-43ad-b783-e16208feb690" /># 🏡 Real Estate MERN Application
+# 🏡 Real Estate MERN Application
 
 A **full-stack real estate web application** built with the **MERN Stack (MongoDB, Express.js, React, Node.js)**.  
 Users can browse, search, and manage property listings with authentication and authorization.
@@ -39,6 +39,7 @@ Users can browse, search, and manage property listings with authentication and a
 <img width="1330" height="590" alt="image" src="https://github.com/user-attachments/assets/222bacb2-6101-4453-b374-55dc4fbf8067" />
 <img width="1366" height="593" alt="image" src="https://github.com/user-attachments/assets/e7be1579-4968-4d72-8ae8-1ce2372a4b20" />
 <img width="1366" height="638" alt="image" src="https://github.com/user-attachments/assets/513e771d-89fb-4786-8360-66068d4c90e8" />
+<img width="1330" height="590" alt="image" src="https://github.com/user-attachments/assets/ac6da281-567f-43ad-b783-e16208feb690" />
 <img width="1366" height="602" alt="image" src="https://github.com/user-attachments/assets/98160746-f94b-49d3-8c2d-96276b9a0a02" />
 <img width="864" height="467" alt="image" src="https://github.com/user-attachments/assets/5dbd4b48-a3e2-4d98-8acf-4fb250f788e1" />
 
